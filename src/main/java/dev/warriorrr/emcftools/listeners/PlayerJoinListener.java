@@ -14,6 +14,9 @@ import static dev.warriorrr.emcftools.EMCFTools.prefix;
 public class PlayerJoinListener  implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
+        if (!event.getPlayer().hasPermission("group.moderator"))
+            event.getPlayer().sendMessage("§3 §6 §3 §6 §3 §6 §d§3 §6 §3 §6 §3 §6 §e");
+        
         DynmapAPI api = ((DynmapAPI) Bukkit.getPluginManager().getPlugin("dynmap"));
                 
         if (!api.getPlayerVisbility(event.getPlayer())) {
