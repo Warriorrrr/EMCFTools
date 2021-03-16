@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>dev.warriorrr</groupId>
-  <artifactId>DynmapUnhider</artifactId>
-  <version>1.0.0</version>
+  <artifactId>EMCFTools</artifactId>
+  <version>0.1.0</version>
 
-  <name>DynmapUnhider</name>
+  <name>EMCFTools</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

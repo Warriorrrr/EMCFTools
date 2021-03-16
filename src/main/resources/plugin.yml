@@ -1,7 +1,7 @@
-main: dev.warriorrr.dynmapunhider.DynmapUnhider
+main: dev.warriorrr.emcftools.EMCFTools
 api-version: 1.16
 author: Warriorrr
-name: DynmapUnhider
-prefix: DynmapUnhider
-version: 1.0.0
+name: EMCFTools
+prefix: EMCFTools
+version: ${project.version}
 depend: [dynmap]

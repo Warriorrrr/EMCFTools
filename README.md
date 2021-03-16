@@ -1,3 +1,3 @@
-# DynmapUnhider
+# EMCFTools
 
-roseremover v2
+actual readme soon probably
