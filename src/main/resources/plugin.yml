@@ -3,5 +3,5 @@ api-version: 1.16
 author: Warriorrr
 name: EMCFTools
 prefix: EMCFTools
-version: ${project.version}
+version: 0.1.1
 depend: [dynmap]

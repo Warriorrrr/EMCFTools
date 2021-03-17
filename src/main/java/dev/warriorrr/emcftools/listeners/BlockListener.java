@@ -10,7 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
+//import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.PortalCreateEvent;
 
 import net.md_5.bungee.api.ChatColor;
@@ -55,13 +55,13 @@ public class BlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void onOpenChest(PlayerInteractEvent event) {
-        if (isContainter(event.getClickedBlock().getType()) && event.getClickedBlock().getY() == 0) {
-            event.getPlayer().sendMessage(prefix + ChatColor.RED + " You cannot interact with this block at this location.");
-            event.getClickedBlock().setType(Material.BEDROCK);
-        }
-    }
+    //@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    //public void onOpenChest(PlayerInteractEvent event) {
+    //    if (isContainter(event.getClickedBlock().getType()) && event.getClickedBlock().getY() == 0) {
+    //        event.getPlayer().sendMessage(prefix + ChatColor.RED + " You cannot interact with this block at this location.");
+    //        event.getClickedBlock().setType(Material.BEDROCK);
+    //    }
+    //}
 
     private boolean isBlockEntity(Material material) {
         if (Tag.SIGNS.isTagged(material) || Tag.WALL_SIGNS.isTagged(material) || Tag.BANNERS.isTagged(material) || Tag.SHULKER_BOXES.isTagged(material))
@@ -109,11 +109,15 @@ public class BlockListener implements Listener {
         }
     }
     
+    @SuppressWarnings("unused")
     private boolean isContainter(Material material) {
         switch(material) {
             case CHEST:
             case TRAPPED_CHEST:
             case BARREL:
+            case HOPPER:
+            case DROPPER:
+            case DISPENSER:
                 return true;
             default:
                 return false;
