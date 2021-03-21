@@ -9,11 +9,13 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.type.Leaves;
+import org.bukkit.block.data.type.SeaPickle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFertilizeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.world.PortalCreateEvent;
 
@@ -100,7 +102,7 @@ public class BlockListener implements Listener {
                         Block block = world.getBlockAt(x, y, z);
                         if (Tag.LEAVES.isTagged(block.getType())) {
                             BlockState blockState = block.getState();
-                            Leaves leafBlock = ((Leaves) blockState.getBlockData());
+                            Leaves leafBlock = (Leaves) blockState.getBlockData();
                             if (leafBlock.isPersistent()) {
                                 leafBlock.setPersistent(false);
                                 blockState.setBlockData(leafBlock);
@@ -109,6 +111,23 @@ public class BlockListener implements Listener {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    public void onBoneMeal(BlockFertilizeEvent event) {
+        for (BlockState blockState : event.getBlocks()) {
+            if (!Tag.CORAL_PLANTS.isTagged(blockState.getType()))
+                continue;
+            
+            int randomNum = (int) (Math.random() * 150) + 1;
+            if (randomNum == 150) {
+                int pickleAmount = (int) (Math.random() * 4) + 1;
+                SeaPickle seaPickle = (SeaPickle) Bukkit.createBlockData(Material.SEA_PICKLE);
+                seaPickle.setWaterlogged(true);
+                seaPickle.setPickles(pickleAmount);
+                blockState.setBlockData(seaPickle);
             }
         }
     }

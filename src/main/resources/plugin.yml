@@ -3,7 +3,7 @@ api-version: 1.16
 author: Warriorrr
 name: EMCFTools
 prefix: EMCFTools
-version: 0.2.0
+version: 0.2.1
 depend: [dynmap, FactionsX]
 
 commands:
