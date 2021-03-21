@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.warriorrr.emcftools.commands.SuicideCommand;
 import dev.warriorrr.emcftools.listeners.BlockListener;
+import dev.warriorrr.emcftools.listeners.EntityListener;
 import dev.warriorrr.emcftools.listeners.PlayerListener;
 import net.md_5.bungee.api.ChatColor;
 
@@ -31,6 +32,7 @@ public class EMCFTools extends JavaPlugin implements Listener {
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
+        Bukkit.getPluginManager().registerEvents(new EntityListener(), this);
 
         getCommand("suicide").setExecutor(new SuicideCommand());
         registerRecipes();
