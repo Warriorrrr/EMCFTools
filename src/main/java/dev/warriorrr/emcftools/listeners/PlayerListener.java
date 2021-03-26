@@ -20,7 +20,7 @@ import static dev.warriorrr.emcftools.EMCFTools.recentlySuicided;
 public class PlayerListener  implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        event.getPlayer().sendMessage("§3 §6 §3 §6 §3 §6 §d§3 §6 §3 §6 §3 §6 §e");
+        event.getPlayer().sendMessage("§3 §6 §3 §6 §3 §6 §e §r §3 §6 §3 §6 §3 §6 §d ");
         
         DynmapAPI api = ((DynmapAPI) Bukkit.getPluginManager().getPlugin("dynmap"));
                 
