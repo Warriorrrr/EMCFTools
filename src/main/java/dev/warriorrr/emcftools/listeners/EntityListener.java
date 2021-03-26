@@ -13,15 +13,13 @@ import org.bukkit.potion.PotionEffectType;
 public class EntityListener implements Listener {
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onVehicleDestroy(VehicleDestroyEvent event) {
-        if (event.getVehicle().getLocation().getY() < 2) {
-            for (Entity passenger : event.getVehicle().getPassengers()) {
-                if (passenger.isDead())
-                    continue;
+        for (Entity passenger : event.getVehicle().getPassengers()) {
+            if (passenger.isDead())
+                continue;
                 
-                passenger.teleport(passenger.getLocation().add(0, 1, 0));
-                if (!(passenger instanceof Player))
-                    ((LivingEntity) passenger).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2, 4));
-            }
+            passenger.teleport(passenger.getLocation().add(0, 1, 0));
+            if (!(passenger instanceof Player))
+                ((LivingEntity) passenger).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2, 4));
         }
     }
 }
