@@ -10,6 +10,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import dev.warriorrr.emcftools.commands.ClearNetherCommand;
 import dev.warriorrr.emcftools.commands.SuicideCommand;
 import dev.warriorrr.emcftools.listeners.BlockListener;
 import dev.warriorrr.emcftools.listeners.EntityListener;
@@ -37,6 +38,7 @@ public class EMCFTools extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new EntityListener(), this);
 
         getCommand("suicide").setExecutor(new SuicideCommand());
+        getCommand("clearnether").setExecutor(new ClearNetherCommand());
         registerRecipes();
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {

@@ -1,7 +1,6 @@
 package dev.warriorrr.emcftools.listeners;
 
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;

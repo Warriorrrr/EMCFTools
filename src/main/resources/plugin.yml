@@ -9,6 +9,8 @@ depend: [dynmap, FactionsX]
 commands:
   suicide:
     description: Allows the user to suicide.
+  clearnether:
+    description: Removes those pesky nether claims
 
 permissions:
   emcftools.suicide:
