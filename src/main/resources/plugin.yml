@@ -3,7 +3,7 @@ api-version: 1.16
 author: Warriorrr
 name: EMCFTools
 prefix: EMCFTools
-version: 0.3.0
+version: 0.4.0
 depend: [dynmap, FactionsX]
 
 commands:
@@ -11,8 +11,15 @@ commands:
     description: Allows the user to suicide.
   clearnether:
     description: Removes those pesky nether claims
+  checkbrand:
+    aliases: [cb]
+    description: Checks the client brand for a specified user.
 
 permissions:
   emcftools.suicide:
     default: true
     description: User is able to use /suicide.
+  emcftools.checkbrand:
+    default: op
+  emcftools.notification:
+    default: op
