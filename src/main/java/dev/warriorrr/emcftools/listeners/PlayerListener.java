@@ -7,9 +7,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result;
 import org.bukkit.inventory.ItemStack;
 
 import dev.warriorrr.emcftools.Utils;
@@ -17,8 +20,19 @@ import net.md_5.bungee.api.ChatColor;
 
 import static dev.warriorrr.emcftools.EMCFTools.prefix;
 import static dev.warriorrr.emcftools.EMCFTools.recentlySuicided;
+import static dev.warriorrr.emcftools.EMCFTools.blacklists;
+import static dev.warriorrr.emcftools.EMCFTools.clientBrands;
 
 public class PlayerListener  implements Listener {
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPrePlayerLogin(AsyncPlayerPreLoginEvent event) {
+        if (!blacklists.containsKey(event.getUniqueId()))
+            return;
+        
+        long seconds = (blacklists.get(event.getUniqueId()) - System.currentTimeMillis()) / 1000 % 180;
+        event.disallow(Result.KICK_OTHER, prefix + ChatColor.RED + " You are currently blacklisted from this server.\n\nExpires in " + seconds + " seconds.");
+    }
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
         //Send string that disables voxelmap
@@ -30,6 +44,11 @@ public class PlayerListener  implements Listener {
             else
                 event.getPlayer().sendMessage(prefix + ChatColor.AQUA + " You are still hidden on dynmap.");
         }
+    }
+
+    @EventHandler
+    public void onPlayerEvent(PlayerQuitEvent event) {
+        clientBrands.remove(event.getPlayer().getUniqueId());
     }
 
     @EventHandler

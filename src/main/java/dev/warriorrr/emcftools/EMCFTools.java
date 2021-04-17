@@ -10,9 +10,11 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import dev.warriorrr.emcftools.commands.CheckBrandCommand;
 import dev.warriorrr.emcftools.commands.ClearNetherCommand;
 import dev.warriorrr.emcftools.commands.SuicideCommand;
 import dev.warriorrr.emcftools.listeners.BlockListener;
+import dev.warriorrr.emcftools.listeners.ClientBrandListener;
 import dev.warriorrr.emcftools.listeners.EntityListener;
 import dev.warriorrr.emcftools.listeners.PlayerListener;
 import net.md_5.bungee.api.ChatColor;
@@ -30,6 +32,8 @@ public class EMCFTools extends JavaPlugin implements Listener {
     public static String prefix = ChatColor.GOLD + "[" + Utils.gradient("EMCF", Color.GREEN, new Color(0, 102, 0)) + ChatColor.GOLD + "]";
     public static Map<UUID, Long> suicideCooldowns = new HashMap<>();
     public static List<UUID> recentlySuicided = new ArrayList<>();
+    public static Map<UUID, Long> blacklists = new HashMap<>();
+    public static Map<UUID, String> clientBrands = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -37,8 +41,11 @@ public class EMCFTools extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityListener(), this);
 
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "minecraft:brand", new ClientBrandListener());
+
         getCommand("suicide").setExecutor(new SuicideCommand());
         getCommand("clearnether").setExecutor(new ClearNetherCommand());
+        getCommand("checkbrand").setExecutor(new CheckBrandCommand());
         registerRecipes();
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
@@ -47,6 +54,11 @@ public class EMCFTools extends JavaPlugin implements Listener {
                 for (Entry<UUID, Long> entry : suicideCooldowns.entrySet()) {
                     if (System.currentTimeMillis() > entry.getValue())
                         suicideCooldowns.remove(entry.getKey());
+                }
+
+                for (Entry<UUID, Long> entry : blacklists.entrySet()) {
+                    if (System.currentTimeMillis() > entry.getValue())
+                        blacklists.remove(entry.getKey());
                 }
             }
         }, 1200, 1200);
